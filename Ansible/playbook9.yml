@@ -1,0 +1,23 @@
+---
+- name: Backup Configuration
+  hosts: all
+  gather_facts: false
+  connection: local
+
+  vars:
+    cli:
+      host: "{{ inventory_hostname }}"
+      username: user
+      password: user123
+
+  tasks:
+    - name: Back up config
+      ios_command:
+        provider: "{{ cli }}"
+        commands: show run
+
+      register: print_out
+
+    - copy: content="{{ print_out.stdout[0] }}"
+            dest="./config_{{ inventory_hostname }}.cfg"
+

@@ -1,0 +1,22 @@
+---
+- name: Get ARP Info
+  hosts: group1
+  gather_facts: false
+  connection: local
+
+  vars:
+    cli:
+      host: "{{ inventory_hostname }}"
+      username: user
+      password: user123
+
+  tasks:
+    - name: Show ARP Table
+      ios_command:
+         provider: "{{ cli }}"
+         commands:
+           - show arp
+
+      register: print_out
+
+    - debug: var=print_out.stdout_lines

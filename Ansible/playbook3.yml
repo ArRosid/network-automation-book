@@ -1,0 +1,34 @@
+---
+- name: IOS interface
+  hosts: R1
+  gather_facts: false
+  connection: local
+
+  vars:
+    cli:
+      host: "{{ inventory_hostname }}"
+      username: user
+      password: user123
+
+  tasks:
+    - name: Remove Interface
+      ios_interface:
+        provider: "{{ cli }}"
+        authorize: yes
+        name: Loopback0
+        state: absent
+
+      register: print_out
+
+    - debug: var=print_out
+
+    - name: Make Interface Down
+      ios_interface:
+        provider: "{{ cli }}"
+        authorize: yes
+        name: Loopback1
+        enabled: False
+
+      register: print_out
+
+    - debug: var=print_out	

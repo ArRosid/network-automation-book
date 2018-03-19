@@ -1,0 +1,27 @@
+---
+- name: Configure ACL
+  hosts: group2
+  gather_facts: false
+  connection: local
+
+  vars:
+    cli:
+      host: "{{ inventory_hostname }}"
+      username: user
+      password: user123
+
+  tasks:
+    - name: Configuring Access List
+      ios_config:
+         provider: "{{ cli }}"
+         authorize: yes
+         parents: ip access-list extended 100
+         lines:
+           - deny icmp any any
+           - deny tcp any any eq 80
+           - deny tcp any any eq 23
+           - permit ip any any
+
+      register: print_out
+
+    - debug: var=print_out

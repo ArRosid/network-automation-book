@@ -1,0 +1,23 @@
+---
+- name: System Management
+  hosts: all
+  gather_facts: false
+  connection: local
+
+  vars:
+    cli:
+      host: "{{ inventory_hostname }}"
+      username: user
+      password: user123
+
+  tasks:
+    - name: Configure Name Server
+      ios_system:
+        provider: "{{ cli }}"
+        authorize: yes
+        name_servers:
+           - 8.8.8.8
+           - 8.8.4.4
+
+      register: print_out
+    - debug: var=print_out

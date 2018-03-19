@@ -1,0 +1,22 @@
+---
+- name: User Management
+  hosts: R1
+  gather_facts: false
+  connection: local
+
+  vars:
+    cli:
+      host: "{{ inventory_hostname }}"
+      username: user
+      password: user123
+
+  tasks:
+    - name: Change Privilege
+      ios_user:
+        provider: "{{ cli }}"
+        authorize: yes
+        name: testuser
+        privilege: 15
+
+      register: print_out
+    - debug: var=print_out
