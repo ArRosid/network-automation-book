@@ -1,2 +1,2 @@
 # NetworkAutomationBook
-Containt script used in Network Automation Book that I've created
+This Repo containt script used in Network Automation Book that I've created
