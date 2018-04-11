@@ -1,12 +1,13 @@
 import paramiko
 import time
+import getpass
+
 
 ip_list = ["192.168.99.1","192.168.99.2",
 	   "192.168.99.3","192.168.99.4",
 	   "192.168.99.5","192.168.99.6"]
-
-username = "user"
-password = "user123"
+username = raw_input("Masukkann Username: ")
+password = getpass.getpass()
 
 ssh_client = paramiko.SSHClient()
 ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
