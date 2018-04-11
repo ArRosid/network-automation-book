@@ -10,7 +10,7 @@ ssh_client = paramiko.SSHClient()
 ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 ssh_client.connect(hostname=ip_address,username=username, password=password)
 
-print "Success login to {0}".format(ip_address)
+print "Success login to {}".format(ip_address)
 conn = ssh_client.invoke_shell()
 
 conn.send("conf t\n")
