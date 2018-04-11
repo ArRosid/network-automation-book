@@ -16,6 +16,7 @@ conn = ssh_client.invoke_shell()
 conn.send("conf t\n")
 conn.send("int lo0\n")
 conn.send("ip add 1.1.1.1 255.255.255.255\n")
+time.sleep(1)
 
 output = conn.recv(65535)
 print output
